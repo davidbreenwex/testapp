@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dbreen.testapp">
 
+    <!-- Add this to your AndroidManifest.xml -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- End of changes -->
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,11 +16,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.LAUNCHER" />
+
                 <data android:scheme="testapp"
                     android:host="main"/>
             </intent-filter>
@@ -40,6 +48,33 @@
                     android:host="screen2" />
             </intent-filter>
         </activity>
+        <!-- Add this to your AndroidManifest.xml -->
+
+        <!-- Configure the aspect of the UI -->
+        <meta-data android:name="SWRVE_PUSH_ICON"
+            android:resource="@mipmap/ic_launcher_round"/>
+        <meta-data android:name="SWRVE_PUSH_ICON_MATERIAL"
+            android:resource="@mipmap/ic_launcher_round"/>
+        <meta-data android:name="SWRVE_PUSH_ICON_LARGE"
+            android:resource="@mipmap/ic_launcher_round" />
+        <meta-data android:name="SWRVE_PUSH_ACCENT_COLOR"
+            android:resource="@android:color/black" />
+        <meta-data android:name="SWRVE_PUSH_ACTIVITY"
+            android:value=".MainActivity"/>
+        <meta-data android:name="SWRVE_PUSH_TITLE"
+            android:value="Your app title"/>
+
+        <service android:name="com.swrve.sdk.firebase.SwrveFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.swrve.sdk.firebase.SwrveFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- End of changes -->
     </application>
 
 </manifest>
